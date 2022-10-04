@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<!--
+  WARNING! Make sure that you match all Quasar related
+  tags to the same version! (Below it's "@2.8.4")
+-->
+
+<head>
+    <title>Discount Dairy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.8.4/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="css/app.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="bg-secondary">
+    <div id="app">
+        <q-layout view="hHh lpR fFf">
+            <q-header elevated class="bg-primary text-white">
+                <q-toolbar>
+                    <q-toolbar-title>
+                        <q-avatar>
+                            <img src="images/cow.png">
+                        </q-avatar>
+                        Discount Dairy
+                    </q-toolbar-title>
+                    <q-btn @click="toggleRightDrawer">
+                        <i class="fas fa-shopping-cart text-white"></i>
+                    </q-btn>
+                </q-toolbar>
+            </q-header>
+
+            <div class="q-pt-xl">
+                <q-btn-toggle
+                        v-model="selected"
+                        spread
+                        no-caps
+                        toggle-color="primary"
+                        color="secondary"
+                        text-color="accent"
+                        :options="categories"
+                ></q-btn-toggle>
+            </div>
+
+            <div class="flex justify-center q-mb-xl q-pa-md text-center bg-accent" id="itemContainer">
+                <q-card class="my-card q-ma-md" v-for="item in products">
+                    <img :src="item.pic">
+
+                    <q-card-section>
+                        <div class="text-h6">{{item.name}}</div>
+                        <div class="text-subtitle2">{{item.size}} - {{item.price}}</div>
+                    </q-card-section>
+
+                    <q-card-section class="q-pt-none">
+                        <q-btn class="bg-primary text-white" @click="addToCart(item.name, item.price)">Add to Cart</q-btn>
+                    </q-card-section>
+                </q-card>
+            </div>
+
+            <q-drawer v-model="rightDrawerOpen" side="right" bordered :width="350" class="bg-primary text-white">
+                <!-- drawer content -->
+                <cart :items="cartItems" @remove-item="removeIt" @close-drawer="toggleRightDrawer" @empty-cart="emptyCart"></cart>
+            </q-drawer>
+
+            <q-footer elevated class="bg-primary text-white q-pt-sm">
+                <q-toolbar>
+                    <q-toolbar-title>
+                        <q-avatar>
+                            <img src="images/cow.png">
+                        </q-avatar>
+                        Discount Dairy
+                    </q-toolbar-title>
+                </q-toolbar>
+            </q-footer>
+        </q-layout>
+    </div>
+<!-- Add the following at the end of your body tag -->
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quasar@2.8.4/dist/quasar.umd.js"></script>
+<script src="js/app-models.js"></script>
+<script src="js/app.js"></script>
+<script src="js/app-quasar.js"></script>
+<script src="js/components/cart.js"></script>
+<script src="js/components/cart-item.js"></script>
+<script>
+app.mount('#app')
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+#cartTable {
+    line-height: 15px;
+    border-collapse: collapse;
+}
+
+#cartTable td {
+    padding: 5px 2px;
+}
+
+#cartTable tr:nth-child(even)
+{
+    background: #9f520c;
+}
+
+#cartTable tr:nth-child(odd)
+{
+    background: #804009;
+}
+
+#itemContainer {
+    border: solid 2px #70400f;
+}
+
+.clickable:hover {
+    cursor: pointer;
+}
