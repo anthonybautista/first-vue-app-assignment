@@ -11,32 +11,35 @@ const app = Vue.createApp({
             cartItems: [],
             rightDrawerOpen: false,
             selected: "Milk",
+            productsList : {
+                'Milk' : [
+                    new Product('Whole Milk', '1 Gallon', 3.49, 'images/whole-milk.png'),
+                    new Product('2% Milk', '1 Gallon', 3.29, 'images/2-milk.png'),
+                    new Product('Chocolate Milk', '1 Gallon', 4.49),
+                ],
+                'Cheese' : [
+                    new Product('Cheddar Cheese', '8 oz', 3.99, 'images/cheddar.png'),
+                    new Product('Gouda Cheese', '8 oz', 4.50, 'images/gouda.png'),
+                    new Product('Meunster Cheese', '8 oz', 4.25, 'images/meunster.png'),
+                    new Product('Cheese Curds', '1 lb', 5.99, 'images/curds.png'),
+                ],
+                'Yogurt' : [
+                    new Product('Strawberry Yogurt', '32 oz', 3.99, 'images/strawberry-yogurt.png'),
+                    new Product('Peach Yogurt', '32 oz', 3.99),
+                ],
+                'Ice Cream' : [
+                    new Product('Strawberry Ice Cream', '16 oz', 3.99,'images/strawberry-ice.png'),
+                    new Product('Chocolate Ice Cream', '16 oz', 3.99,'images/chocolate-ice.png'),
+                    new Product('Mint Chip Ice Cream', '16 oz', 3.99,'images/mint-ice.png'),
+                    new Product('Butter Pecan Ice Cream', '16 oz', 3.99,'images/butter-ice.png'),
+                ],
+            },
         }
     },
 
     methods: {
         show(category) {
-            this.products.splice(0,this.products.length);
-
-            if (category === "Milk") {
-                this.products.push(new Product('Whole Milk', '1 Gallon', 3.49, 'images/whole-milk.png'));
-                this.products.push(new Product('2% Milk', '1 Gallon', 3.29, 'images/2-milk.png'));
-                this.products.push(new Product('Chocolate Milk', '1 Gallon', 4.49));
-            } else if (category === "Cheese") {
-                this.products.push(new Product('Cheddar Cheese', '8 oz', 3.99, 'images/cheddar.png'));
-                this.products.push(new Product('Gouda Cheese', '8 oz', 4.50, 'images/gouda.png'));
-                this.products.push(new Product('Meunster Cheese', '8 oz', 4.25, 'images/meunster.png'));
-                this.products.push(new Product('Cheese Curds', '1 lb', 5.99, 'images/curds.png'));
-            } else if (category === "Yogurt") {
-                this.products.push(new Product('Strawberry Yogurt', '32 oz', 3.99, 'images/strawberry-yogurt.png'));
-                this.products.push(new Product('Peach Yogurt', '32 oz', 3.99));
-            } else if (category === "Ice Cream") {
-                this.products.push(new Product('Strawberry Ice Cream', '16 oz', 3.99,'images/strawberry-ice.png'));
-                this.products.push(new Product('Chocolate Ice Cream', '16 oz', 3.99,'images/chocolate-ice.png'));
-                this.products.push(new Product('Mint Chip Ice Cream', '16 oz', 3.99,'images/mint-ice.png'));
-                this.products.push(new Product('Butter Pecan Ice Cream', '16 oz', 3.99,'images/butter-ice.png'));
-            }
-
+            this.products = this.productsList[category];
         },
         toggleRightDrawer() {
             this.rightDrawerOpen = !this.rightDrawerOpen;
